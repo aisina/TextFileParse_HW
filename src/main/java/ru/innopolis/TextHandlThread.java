@@ -18,46 +18,50 @@ public class TextHandlThread extends Thread{
     int id;
     String fileName;
     HashSet<String> mySet;
-    static Boolean isWorkingThreads;
+    //static Boolean isWorkingThreads;
 
-    TextHandlThread(int id, String fileName, HashSet mySet, Boolean isWorkingThreads){
+    TextHandlThread(int id, String fileName, HashSet mySet){
         this.id = id;
         this.fileName = fileName;
         this.mySet = mySet;
-        this.isWorkingThreads = isWorkingThreads;
+        //this.isWorkingThreads = isWorkingThreads;
     }
 
     @Override
     public void run() {
+
+        System.out.println("поток запущен");
+
         ReaderClass reader = new ReaderClass();
         try (BufferedReader br = reader.readUsingBufferedReader(this.fileName, StandardCharsets.UTF_8);) {
 
             String line;
             String[] words;
 
-            while(isWorkingThreads){
+            while(TextHandling.isWThreads){
+                // while(TextHandling.isWThreads){
 
                 //считываем, пока не будет достигнут конец файла
                 // line.length() != 0 - случай, когда строка пуста (лишний Enter)
                 int linenumber = 0;
-                while((line = br.readLine()) != null  && line.length() != 0 && isWorkingThreads) {
+                while((line = br.readLine()) != null  && line.length() != 0 && TextHandling.isWThreads) {
 
                     linenumber++;
 
                     words = parseLine(line, linenumber);
 
                     int i = 0;
-                    while (i < words.length && isWorkingThreads) {
+                    while (i < words.length && TextHandling.isWThreads) {
 
-                        isWorkingThreads = validator.validate(words[i]);
+                        TextHandling.isWThreads = validator.validate(words[i]);
 
-                        if (isWorkingThreads) {
+                        if (TextHandling.isWThreads) {
 
                             synchronized (mySet) {
 
                                 if(mySet.contains(words[i])){
                                     logger.warn("В файле '" + this.fileName + "' найден дубликат слова '" + words[i] + "'");
-                                    isWorkingThreads = false;
+                                    TextHandling.isWThreads = false;
                                     break;
                                 }
                                 else{
@@ -77,8 +81,8 @@ public class TextHandlThread extends Thread{
             //e.printStackTrace();
             logger.warn("Файл '" + this.fileName + "' не найден");
         } catch (IOException e) {
-            //e.printStackTrace();
-            logger.warn("Ошибка чтения файла '" + this.fileName + "'");
+            e.printStackTrace();
+            //logger.warn("Ошибка чтения файла '" + this.fileName + "'");
         }
     }
 

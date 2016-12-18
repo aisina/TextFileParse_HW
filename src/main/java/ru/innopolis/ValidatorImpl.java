@@ -34,4 +34,10 @@ public class ValidatorImpl implements Validator {
 
         return matcher.matches();
     }
+
+    public static void main(String[] args) {
+        ValidatorImpl val = new ValidatorImpl();
+        boolean b = val.validate("khf");
+        System.out.println(b);
+    }
 }

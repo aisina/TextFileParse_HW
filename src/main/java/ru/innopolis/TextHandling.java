@@ -50,13 +50,13 @@ public class TextHandling {
 
         List<String> textNames = new ArrayList<String>(); //названия файлов
 
-        File dir = new File("C:\\Users\\innopolis\\IdeaProjects\\First_HW"); //в данной папке хранятся txt файлы
+        File dir = new File("C:\\Users\\innopolis\\IdeaProjects\\TextFileParse_HW"); //в данной папке хранятся txt файлы
         getFilesFromClasspath(dir, textNames);
 
         //массив Threads для каждого каталога
         Thread[] threads = new Thread[textNames.size()];
         for(int i = 0; i < threads.length; i++){
-            threads[i] = new TextHandlThread(i, textNames.get(i), set, isWThreads);
+            threads[i] = new TextHandlThread(i, textNames.get(i), set);
         }
 
         startThreads(threads);
