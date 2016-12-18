@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TextFileParse_HW.iml" filepath="$PROJECT_DIR$/.idea/modules/TextFileParse_HW.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TextFileParse_HW_main.iml" filepath="$PROJECT_DIR$/.idea/modules/TextFileParse_HW_main.iml" group="TextFileParse_HW" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TextFileParse_HW_test.iml" filepath="$PROJECT_DIR$/.idea/modules/TextFileParse_HW_test.iml" group="TextFileParse_HW" />
+    </modules>
+  </component>
+</project>
